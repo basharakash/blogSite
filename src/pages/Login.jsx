@@ -1,4 +1,4 @@
-import React from 'react';
+import  from 'react';
 import {Login as LoginComponent} from "../Components/index.js"
 
 function Login() {
