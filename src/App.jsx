@@ -34,27 +34,27 @@ function App() {
     //     fetchData();
     // }, [dispatch]);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const userData = await authService.getCurrentUser();
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userData = await authService.getCurrentUser();
 
-    //             if (userData) {
-    //                 dispatch(login({ userData }));
-    //                 console.log(userData);
-    //             } else {
-    //                 dispatch(logOut());
-    //             }
-    //         } catch (error) {
-    //             // Handle any errors that occur during the fetching process
-    //             console.error("Error fetching user data:", error);
-    //         } finally {
-    //             setloading(false);
-    //         }
-    //     };
+                if (userData) {
+                    dispatch(login({ userData }));
+                    console.log(userData);
+                } else {
+                    dispatch(logOut());
+                }
+            } catch (error) {
+                // Handle any errors that occur during the fetching process
+                console.error("Error fetching user data:", error);
+            } finally {
+                setloading(false);
+            }
+        };
 
-    //     fetchData();
-    // }, [dispatch]);
+        fetchData();
+    }, [dispatch]);
 
     // useEffect(() => {
     //     let isMounted = true; // Variable to track component mount state
@@ -91,38 +91,38 @@ function App() {
     //     };
     // }, [dispatch]);
 
-    useEffect(() => {
-        let isMounted = true;
+    // useEffect(() => {
+    //     let isMounted = true;
 
-        const fetchData = async () => {
-            try {
-                const userDataPromise = authService.getCurrentUser();
-                const userData = await userDataPromise;
+    //     const fetchData = async () => {
+    //         try {
+    //             const userDataPromise = authService.getCurrentUser();
+    //             const userData = await userDataPromise;
 
-                if (isMounted) {
-                    if (userData) {
-                        const resolvedUserData = await userData; // Ensure the Promise is resolved
-                        dispatch(login({ userData: resolvedUserData }));
-                        console.log(resolvedUserData);
-                    } else {
-                        dispatch(logOut());
-                    }
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            } finally {
-                if (isMounted) {
-                    setloading(false);
-                }
-            }
-        };
+    //             if (isMounted) {
+    //                 if (userData) {
+    //                     const resolvedUserData = await userData; // Ensure the Promise is resolved
+    //                     dispatch(login({ userData: resolvedUserData }));
+    //                     console.log(resolvedUserData);
+    //                 } else {
+    //                     dispatch(logOut());
+    //                 }
+    //             }
+    //         } catch (error) {
+    //             console.error("Error fetching user data:", error);
+    //         } finally {
+    //             if (isMounted) {
+    //                 setloading(false);
+    //             }
+    //         }
+    //     };
 
-        fetchData();
+    //     fetchData();
 
-        return () => {
-            isMounted = false;
-        };
-    }, [dispatch]);
+    //     return () => {
+    //         isMounted = false;
+    //     };
+    // }, [dispatch]);
 
     return !loading ? (
         <div className="min-h-screen flex flex-wrap content-between bg-gray-500">
