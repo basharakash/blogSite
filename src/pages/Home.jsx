@@ -17,21 +17,23 @@ function Home() {
         });
     }, []);
 
-    return isAuth ? (
+    return isAuth ? (posts.length > 0 ? (
         <div className="w-full py-8">
-            <Container>
-                <div className="flex flex-wrap">
-                    {posts.map((post) => (
-                        <div key={post.$id} className="p-2 w-1/2">
-                            <PostCard {...post} />
-                        </div>
-                    ))}
-                </div>
-            </Container>
-        </div>
+        <Container>
+            <div className="flex flex-wrap">
+                {posts?.map((post) => (
+                    <div key={post.$id} className="p-2 w-1/2">
+                        <PostCard {...post} />
+                    </div>
+                ))}
+            </div>
+        </Container>
+    </div>
     ) : (
-        "Show post List"
-    );
+            "No Post is made. Creat one"
+    )) : (
+        "Login to view post"
+    )
 }
 
 export default Home;

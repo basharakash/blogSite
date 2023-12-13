@@ -1,28 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import AppwriteService from "../appwrite/config.js"
-import {Container, PostCard} from "../Components/index.js"
+import React, { useEffect, useState } from "react";
+import AppwriteService from "../appwrite/config.js";
+import { Container, PostCard } from "../Components/index.js";
 
-function AllPost(props) {
-    const [posts, setPosts] = useState([])
+function AllPost() {
+    const [posts, setPosts] = useState([]);
+
     useEffect(() => {
-
+        const fetchData = async () => {
+            try {
+                const post = await AppwriteService.getPosts([]);
+                console.log(post);
+                if (post) {
+                    setPosts(post.documents);
+                }
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        };
+        fetchData();
     }, []);
-
-    AppwriteService.getPosts([]).then((post) => {
-        if (post) {
-            setPosts(post.documents)
-        }
-    })
 
     return (
         <div className="w-full py-8">
             <Container>
                 <div className="flex flex-wrap">
-                    {posts.map((post) => {
+                    {posts?.map((post) => (
                         <div key={post.$id} className="p-2 w-1/4">
-                            <PostCard {...post}/>
+                            <PostCard {...post} />
                         </div>
-                    })}
+                    ))}
                 </div>
             </Container>
         </div>
